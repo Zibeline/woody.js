@@ -90,3 +90,9 @@ La vitesse de fondu est stocké dans les deux variables suivantes :
     woody.fadeBox
     
 Où `woody.fadeBkg` est la vitesse d'apparition et de disparition de l'arrière-plan et `woody.fadeBox` est la vitesse d'apparition et de disparition de la boite.
+
+# To-do list
+
+* Pour les woody.confirm(), choisir certains boutons par défaut si aucun bouton n'est passé en argument
+* Titre et icone dans les boites
+* Plusieurs animations avec choix
