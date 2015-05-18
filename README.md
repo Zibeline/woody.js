@@ -10,15 +10,21 @@ Copier les fichiers woody.js et woody.css dans votre projet et les importer
 
 ## woody.alert()
 
-woody.alert(msg, callback);
+  woody.alert(msg, callback);
 
 ## woody.confirm()
 
-woody.confirm(msg, buttons, callback)
+  woody.confirm(msg, buttons, callback)
 
 ## woody.prompt() 
 
-woody.prompt(msg, placeholder, callback)
+  woody.prompt(msg, placeholder, callback)
+  
+* **msg** : message à afficher
+* **placeholder** : placeholder dans la zone de texte
+* **callback** : fonction callback à appeler
+
+La fonction callback recevra comme seul argument le texte entré par l'utilisateur, ou `null` si l'utilisateur cliques sur annuler
 
 # Paramètres
 
