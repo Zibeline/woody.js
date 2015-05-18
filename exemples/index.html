@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>woody.js - Exemples</title>
+		<link rel="stylesheet" href="../woody.css">
+
+		<style>
+		main {
+			width: 750px;
+			margin: auto;
+			border-radius: 5px;
+			padding: 5px;
+			border: solid 1px #333333;
+		}
+
+		#buttonsContainer {
+			background-color: #c2c2c2;
+			padding: 3px;
+			text-align: center;
+			margin-bottom: 25px;
+		}
+
+		#message {
+			width: 700px;
+			height: 100px;
+			border: solid 1px #c2c2c2;
+			font-family: Courier;
+			margin: auto;
+			overflow: auto;
+			font-size: 8pt;
+		}
+
+		#message::first-line {
+			background-color: #d9d9d9;
+		}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<div id="buttonsContainer">
+				<button id="test-alert">Alert</button>
+				<button id="test-prompt">Prompt</button>
+				<button id="test-confirm">Confirm</button> - 
+				<button id="test-light">Thème light</button>
+				<button id="test-dark">Thème dark</button>
+			</div>
+
+			<div id="message"></div>
+		</main>
+
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="../woody.js"></script>
+		<script>
+		$(function() {
+			$('#test-alert').click(function() {
+				woody.alert("Hello world !", alertCbk);
+			});
+
+			$('#test-prompt').click(function() {
+				woody.prompt("Hello world ?", "Pierre Dupont", promptCbk);
+			});
+
+			$('#test-confirm').click(function() {
+				woody.confirm("Hello world ?", [woody.OK, woody.CANCEL, woody.CONFIRM], confirmCbk);
+			});
+
+			$('#test-light').click(function() {
+				woody.setTheme('light');
+				log("Le thème a été changé en 'light'.");
+			});
+
+			$('#test-dark').click(function() {
+				woody.setTheme('dark');
+				log("Le thème a été changé en 'dark'.");
+			});
+		});
+
+		function log(message) {
+			var msg = "> "+message+"<br />"+$('#message').html();
+			$('#message').html(msg);
+		}
+
+		function alertCbk(dt) {
+			log("Une alerte a été ouverte, et elle a renvoyé "+dt+".");
+		}
+
+		function promptCbk(dt) {
+			log("Une boite prompt a été ouverte, et l'utilisateur a entré '"+dt+"'.");
+		}
+
+		function confirmCbk(dt) {
+			var bouton = $(woody.buttons[dt]).text();
+			log("Un boite de confirmation a été ouverte, et l'utilisateur a cliqué sur le bouton '"+bouton+"'.");
+		}
+
+		</script>
+	</body>
+</html>
