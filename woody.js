@@ -51,7 +51,13 @@ var woody = {
 	},
 	close: function(callback, cbk) {
 		var woody = this;
-		$('#woody-box').fadeOut(woody.fadeBox, function() {$('#woody-bkg').fadeOut(woody.fadeBkg, function() {callback(cbk);});});	
+		$('#woody-box').fadeOut(woody.fadeBox, function() {
+			$('#woody-bkg').fadeOut(woody.fadeBkg, function() {
+				$('#woody-box').remove();
+				$('#woody-bkg').remove();
+				callback(cbk);
+			});
+		});	
 		$(document).unbind("keypress.woody-hotkeys"); // reset des raccourcis
 	},
 
