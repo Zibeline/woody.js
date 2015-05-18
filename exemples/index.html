@@ -32,7 +32,7 @@
 			font-size: 8pt;
 		}
 
-		#message::first-line {
+		#line1 {
 			background-color: #d9d9d9;
 		}
 		</style>
@@ -48,7 +48,10 @@
 				<button id="test-dark">Thème dark</button>
 			</div>
 
-			<div id="message"></div>
+			<div id="message">
+				<div id="line1"></div>
+				<div id="rest"></div>
+			</div>
 		</main>
 
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -79,8 +82,8 @@
 		});
 
 		function log(message) {
-			var msg = "> "+message+"<br />"+$('#message').html();
-			$('#message').html(msg);
+			$('#rest').html($('#line1').html()+"<br />"+$('#rest').html());
+			$('#line1').html("> "+message);
 		}
 
 		function alertCbk(dt) {

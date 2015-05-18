@@ -16,6 +16,16 @@ var woody = {
 	fadeBkg: 100,
 	fadeBox: 150,
 
+	// shortcuts for the buttons
+	hotkeys: [
+		97,
+		101,
+		111,
+		110,
+		118,
+		99
+	],
+
 	// buttons
 	buttons: [
 		'<button data-ret="0" class="woody-btn" id="woody-btn-cancel">Annuler</button>',
@@ -37,11 +47,12 @@ var woody = {
 	},
 	show: function() {
 		var woody = this;
-		$('#woody-bkg').fadeIn(woody.fadeBkg, function() {$('#woody-box').fadeIn(woody.fadeBox);});
+		$('#woody-bkg').fadeIn(woody.fadeBkg, function() {$('#woody-box').fadeIn(woody.fadeBox, function() {$($('.woody-btn')[0]).focus();});});
 	},
 	close: function(callback, cbk) {
 		var woody = this;
 		$('#woody-box').fadeOut(woody.fadeBox, function() {$('#woody-bkg').fadeOut(woody.fadeBkg, function() {callback(cbk);});});	
+		$(document).unbind("keypress.woody-hotkeys"); // reset des raccourcis
 	},
 
 	// main functions
@@ -63,19 +74,21 @@ var woody = {
 
 		// place buttons
 		$('#woody-box-buttons').html(btns);
-
+		
 		// actions buttons
 		$('.woody-btn').each(function() {
 			$(this).click(function () { woody.close(callback, $(this).data('ret'));	});
 		});
-		
+
+		woody.shortcuts(callback);
+
 		woody.show();
 	},
 	prompt: function (msg, placeholder, callback) {
 		var woody = this;
 		woody.open();
 
-		msg += '<p><input type="text" id="woody-text" placeholder="'+placeholder+'"></p>';
+		msg += '<p><input type="text" id="woody-text" autofocus placeholder="'+placeholder+'"></p>';
 		// place msg
 		$('#woody-box-content').html(msg);
 
@@ -87,5 +100,15 @@ var woody = {
 		$("#woody-btn-cancel").click(function () { woody.close(callback, null);});
 
 		woody.show();
+	},
+
+	// shortcuts functions
+	shortcuts: function (callback) {
+		var woody = this;
+		$(document).bind("keypress.woody-hotkeys", function(e) {
+			$.each(woody.hotkeys, function (btn, key) {
+				if (e.which==key && $('.woody-btn[data-ret="'+btn+'"]').length>0) {woody.close(callback, btn); return false};
+			});
+		});
 	}
 }
