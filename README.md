@@ -96,3 +96,6 @@ Où `woody.fadeBkg` est la vitesse d'apparition et de disparition de l'arrière-
 * Pour les woody.confirm(), choisir certains boutons par défaut si aucun bouton n'est passé en argument
 * Titre et icone dans les boites
 * Plusieurs animations avec choix
+* Pouvoir activer ou désactiver les raccourcis clavier
+* Pouvoir choisir la langue
+* Pouvoir créer des formulaires plus complexes que prompt
